@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block title %} Create user {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-6 m-4 p-4 rounded" style="background-color: #33393E; color: aliceblue;">
+            <h2>Encuesta Dojo</h2>
+            <form action="/user/new/" method="post">
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">First_name</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Type your first_name">
+                </div>
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Type your last name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Type your last name">
+                </div>
+                <button type="submit" class="btn btn-primary">Home</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
