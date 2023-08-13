@@ -16,7 +16,7 @@ class User:
 
         Parámetros:
             - self (object): Objeto de tipo `user`.
-            - data (dict): Diccionario con los datos de la encuesta.
+            - data (dict): Diccionario con los datos de la usuario.
         
         Retorno:
             None: Retorna nada.
@@ -32,7 +32,7 @@ class User:
     @classmethod
     def get_all(cls):
         """
-        Obtener todas las encuestas de la tabla `users`.
+        Obtener todas las usuarios de la tabla `users`.
         
         El método `get_all` es un método de clase, lo que significa que se
         puede llamar directamente desde la clase `user` sin necesidad de
@@ -42,7 +42,7 @@ class User:
             - cls (object): Objeto de tipo `user`.
 
         Retorno:
-            - users (list): Lista de encuestas.
+            - users (list): Lista de usuarios.
         """
 
         query = """SELECT * FROM users;"""
@@ -56,7 +56,7 @@ class User:
     @classmethod
     def get_one(cls, data: dict):
         """
-        Obtener una encuesta por id.
+        Obtener un usuario por id.
 
         El método `get_one` es un método de clase, lo que significa que se
         puede llamar directamente desde la clase `user` sin necesidad de
@@ -64,13 +64,13 @@ class User:
         """
 
         query = """SELECT * FROM users WHERE id = %(id)s;"""
-        result = connectToMySQL("dojo_user").query_db(query, data)
+        result = connectToMySQL("users_schema").query_db(query, data)
         return cls(result[0])
 
     @classmethod
     def create(cls, data: dict):
         """
-        Crear una nueva encuesta.
+        Crear un nuevo usuario.
 
         El método `create` es un método de clase, lo que significa que se
         puede llamar directamente desde la clase `user` sin necesidad de
@@ -80,11 +80,53 @@ class User:
 
         Parámetros:
             - cls (object): Objeto de tipo `user`
-            - data (dict): Diccionario con los datos de la encuesta.
+            - data (dict): Diccionario con los datos de la usuario.
 
         Retorno:
             -
         """
 
         query = """INSERT INTO users (first_name, last_name, email) VALUES (%(first_name)s, %(last_name)s, %(email)s);"""  # noqa: E501
+        return connectToMySQL("users_schema").query_db(query, data)
+    
+
+    @classmethod
+    def update(cls, data: dict):
+        """
+        Metodo para editar un usuario
+
+        Parámetros:
+            - cls (object): Objeto de tipo `user`
+            - data (dict): Diccionario con los datos a actualizar.
+
+        Retorno:
+            -
+        """
+
+        query = """
+                    UPDATE users SET 
+                    first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s 
+                    WHERE id = %(id)s;
+                """  # noqa: E501
+        return connectToMySQL("users_schema").query_db(query, data)
+    
+
+    @classmethod
+    def delete(cls, data: dict):
+        """
+        Eliminar usuario.
+
+        El método `delete` es un método de clase, lo que significa que se
+        puede llamar directamente desde la clase `user` sin necesidad de
+        crear una instancia (objeto).
+
+        Parámetros:
+            - cls (object): Objeto de tipo `user`
+            - data (dict): Diccionario con el id a eliminar
+
+        Retorno:
+            -
+        """
+
+        query = """DELETE FROM users where id = %(id)s;"""  # noqa: E501
         return connectToMySQL("users_schema").query_db(query, data)
