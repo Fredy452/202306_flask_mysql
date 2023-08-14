@@ -1,7 +1,7 @@
 """Ninja models."""
 
 # Config
-from Core.Dojos_and_Ninjas.app.config.mysql_connection import connectToMySQL
+from app.config.mysql_connection import connectToMySQL
 
 
 class Ninja:
@@ -67,6 +67,34 @@ class Ninja:
         query = """SELECT * FROM ninjas WHERE id = %(id)s;"""
         result = connectToMySQL("dojos_y_ninjas").query_db(query, data)
         return cls(result[0])
+    
+    @classmethod
+    def get_ninjas(cls, data: dict):
+        """
+        Obtener los ninjas asociados a un dojo por su id.
+
+        Parámetros:
+            - cls (object): Objeto de tipo `dojo`.
+            - data (dict): Diccionario con el id a consultar.
+
+        Retorno:
+            - Ninja (list): Lista de ninjas.
+        """
+        
+        query = """
+                    SELECT ninjas.id, ninjas.nombre, ninjas.apellido, ninjas.edad, dojos.id
+                    FROM dojos
+                    LEFT JOIN ninjas ON dojos.id = ninjas.dojo_id
+                    WHERE dojos.id = %(id)s;
+                """  # noqa: E501
+        results = connectToMySQL("dojos_y_ninjas").query_db(query, data)
+
+        ninjas: list = []
+        for ninja in results:
+            ninjas.append(cls(ninja))
+        return ninjas
+        
+
 
     @classmethod
     def create(cls, data: dict):

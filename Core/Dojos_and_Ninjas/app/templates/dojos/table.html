@@ -1,0 +1,32 @@
+<!-- Table.html va a eredar de base.html -->
+{% extends "base.html" %}
+
+<!-- Accedemos al block content -->
+{% block content %}
+    <div class="content d-flex justify-content-center">
+        <div class="row">
+            <h2 class="d-flex justify-content-center mb-4">Tabla de usuarios</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Nombre Completo</th>
+                        </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.first_name }} - {{ user.last_name }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+{% endblock %}
