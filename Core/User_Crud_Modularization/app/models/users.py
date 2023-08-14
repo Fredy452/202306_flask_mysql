@@ -1,7 +1,7 @@
 """Users models."""
 
 # Config
-from app.config.mysql_connection import connectToMySQL
+from Core.Dojos_and_Ninjas.app.config.mysql_connection import connectToMySQL
 
 
 class User:

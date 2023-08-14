@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+
+{% block title %} Session Dojo {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-4 m-4 p-4 rounded" style="background-color: #33393E; color: aliceblue; height: 100%;">
+            <h2>Nuevo Dojo</h2>
+            <form action="/dojo/create/" method="post">
+                <label for="dojo">Nombre</label>
+                <div class="form-group">
+                    <input type="text" name="nombre" id="dojo" class="form-control" placeholder="Ingrese nombre">
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-4 m-4 p-4 rounded" style="background-color: #33393E; color: aliceblue;">
+            <h2>Todos los Dojos</h2>
+            <div class="list-group list-group-numbered">
+                {% for dojo in dojos %}
+                <a href="#" class="list-group-item list-group-item-action">{{ dojo.nombre }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-12 text-center">
+            <a class="btn btn-primary" href="/ninja/create/">Crear Ninja</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
