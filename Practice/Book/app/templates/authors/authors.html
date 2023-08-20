@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block title %} Lista de Authores {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-4 m-4 p-4 rounded" style="background-color: #33393E; color: aliceblue; height: 100%;">
+            <h2>Agregar Autor</h2>
+            <form action="/authors/create/" method="post">
+                <label for="nombe" class="form-label">Nombre</label>
+                <div class="form-group">
+                    <input type="text" name="name" id="nombre" class="form-control" placeholder="Ingrese el nombre del autor">
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-4 m-4 p-4 rounded" style="background-color: #33393E; color: aliceblue;">
+            <h2>Lista de autores</h2>
+            <div class="list-group list-group-numbered">
+                {% for author in authors %}
+                <a href="/authors/{{ author.id }}/favorites" class="list-group-item list-group-item-action">{{ author.name }}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-12 text-center">
+            <a class="btn btn-primary" href="{{ url_for('books') }}">Crear Libro</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

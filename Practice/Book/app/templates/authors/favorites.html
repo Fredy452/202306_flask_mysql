@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+
+{% block title %} Authors favorites {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col m-4">
+            <h2>Favoritos de {{ author.name }}</h2>
+            {% if books %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <tr>
+                            <th>Title</th>
+                            <th># de pagina</th>
+                        </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for favorite in favorites %}
+                    <tr>
+                        <td>{{ favorite.title }}</td>
+                        <td>{{ favorite.num_of_pages }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else: %}
+            <h4 class="text-info">No posee libros favoritos</h4>
+            {% endif %}
+        </div>
+
+        <div class="col m-4">
+            <div class="list-group list-group-numbered">
+                <h2>Agregar Libros Favoritos</h2>
+                <div class="form-group mb-4">
+                    <form action="{{ url_for('favorite_create', id=author.id) }}" method="post">
+                        <label for="book" class="form-label">Libro</label>
+                        <select class="form-select" name="book_id" id="book">
+                            {% for book in books %}
+                            <option value="{{ book.id }}">{{book.title}}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-primary" type="submit">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-12 text-center">
+            <a class="btn btn-primary" href="{{ url_for('authors') }}">Volver</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
