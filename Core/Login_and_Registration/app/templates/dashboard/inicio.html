@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block title %} Dshboard {% endblock %}
+
+{% include "includes/nav.html" %}
+
+{% block content %}
+
+<h5>welcome {{ session.user['email'] }}</h5>
+
+{% endblock %}
