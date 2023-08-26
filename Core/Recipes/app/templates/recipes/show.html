@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Dshboard {% endblock %}
+
+{% include "includes/nav.html" %}
+
+
+{% block content %}
+
+<h5>Welcome {{ session.user['first_name']}}</h5>
+<div class="card shadow rounded-2 p-4">
+    <div class="card-body">
+        <div class="col d-flex justify-content-between align-items-center">
+            <h5 class="card-title">{{ recipe.title }}</h5>
+            <div class="links">
+                <a href="{{ url_for('recipes') }}" class="btn btn-success m-3"><i class="bi bi-house-door-fill"></i>Volver</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger m-3"><i class="bi bi-box-arrow-left"></i>Salir</a>
+            </div>
+        </div>
+        <!-- reseta section -->
+        <fieldset>
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Descripción:</p>
+                    <p>Antes de 30 minutos:</p>
+                    <p>Instruciones:</p>
+                    <p>Fecha de creación:</p>
+                </div>
+                <div class="col">
+                    <p>{{ recipe.description }}</p>
+                    <p>{% if recipe.under == 0 %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}</p>
+                    <p>{{ recipe.instruction }}</p>
+                    <p>{{ recipe.date }}</p>
+                </div>
+            </div>
+            
+        </fieldset>
+    </div>
+</div>
+
+
+{% endblock %}

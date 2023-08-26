@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %} Crear Recetas {% endblock %}
+
+{% include "includes/nav.html" %}
+
+{% include "includes/messages.html" %}
+
+{% block content %}
+<div class="card shadow rounded-2 p-4">
+    <div class="card-body">
+        <div class="col d-flex justify-content-between align-items-center">
+            <h5 class="card-title">Crear nueva receta</h5>
+            <div class="links">
+                <a href="{{ url_for('recipes') }}" class="btn btn-success m-3"><i class="bi bi-house-door-fill"></i>Inicio</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger m-3"><i class="bi bi-box-arrow-left"></i>Salir</a>
+            </div>
+        </div>
+        <!-- form section -->
+        <form action="{{ url_for('recipes_create') }}" method="post" class="container mt-4">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="title" class="form-label">Titulo</label>
+                        <input type="text" name="title" id="title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea name="description" id="description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instruction" class="form-label">Instruction</label>
+                        <textarea name="instruction" id="instruction" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <fieldset>
+                        <legend>Detalles</legend>
+                        <div class="form-group">
+                            <label for="date_cooked" class="form-label">Fecha de cocina</label>
+                            <input type="date" class="form-control" name="date" id="date_cooked">
+                        </div>
+                        <div class="form-group m-4">
+                            <label for="check">Under 30 minutes?</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="under" id="radioYes" value="0">
+                                <label class="form-check-label" for="radioYes">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="under" id="radioNo" value="1">
+                                <label class="form-check-label" for="radioNo">No</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+        </form>
+        
+
+    </div>
+</div>
+
+
+{% endblock %}
